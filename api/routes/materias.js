@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
 const findMateria = (id, { onSuccess, onNotFound, onError }) => {
   models.materia
     .findOne({
-      attributes: ["id", "nombre"],
+      attributes: ["id", "nombre","id_carrera"],
       where: { id }
     })
     .then(materia => (materia ? onSuccess(materia) : onNotFound()))
@@ -71,8 +71,7 @@ router.put("/:id", (req, res) => {
     materia
       .update({ id_carrera: req.body.id_carrera }, { fields: ["id_carrera"] })
       .then(() => res.sendStatus(200))
-      .catch(error => {
-        //ver esto de aca 
+      .catch(error => { 
       if (error == "SequelizeUniqueConstraintError: Validation error") {
         res.status(400).send('Bad request: no')
         }
