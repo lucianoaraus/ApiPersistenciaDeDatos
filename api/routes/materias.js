@@ -65,28 +65,6 @@ router.put("/:id", (req, res) => {
     onError: () => res.sendStatus(500)
   });
 });
-  
-router.put("/:id", (req, res) => {
-  const onSuccess = materia =>
-    materia
-      .update({ id_carrera: req.body.id_carrera }, { fields: ["id_carrera"] })
-      .then(() => res.sendStatus(200))
-      .catch(error => { 
-      if (error == "SequelizeUniqueConstraintError: Validation error") {
-        res.status(400).send('Bad request: no')
-        }
-      else {
-        console.log(`Error al intentar actualizar la base de datos: ${error}`)
-        res.sendStatus(500)
-      }
-    });
-    findMateria(req.params.id, {
-    onSuccess,
-    onNotFound: () => res.sendStatus(404),
-    onError: () => res.sendStatus(500)
-  });
-});
-
 router.delete("/:id", (req, res) => {
   const onSuccess = materia =>
     materia
