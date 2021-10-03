@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     materia.belongsTo(
       models.carrera, // modelo al que pertenece
       {
-        as: "Carrera-Relacionada", // nombre de mi relacion
+        as: "carrera-relacionada", // nombre de mi relacion
         foreignKey: "id_carrera", // campo con el que voy a igualar
       }
     );
