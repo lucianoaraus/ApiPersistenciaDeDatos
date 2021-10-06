@@ -5,7 +5,8 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var carrerasRouter = require("./routes/carreras");
 var materiasRouter = require("./routes/materias");
-var facultadesRouter = require("./routes/facultades");
+var universidadesRouter = require("./routes/universidades");
+var alumnoRouter = require("./routes/alumnos");
 
 var app = express();
 
@@ -22,7 +23,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/car", carrerasRouter);
 app.use("/mat", materiasRouter);
-app.use("/fac", facultadesRouter);
+app.use("/uni", universidadesRouter);
+app.use("/alu", alumnoRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));
