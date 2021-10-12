@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
     .findAll({
       attributes: ["id", "nombre","id_carrera"]
     })
-    .then(carreras => res.send(carreras))
+    .then(alumno => res.send(alumno))
     .catch(() => res.sendStatus(500));
 });
 
@@ -30,7 +30,8 @@ router.post("/", (req, res) => {
   const findAlumno = (id, { onSuccess, onNotFound, onError }) => {
     models.alumno
       .findOne({
-        attributes: ["id", "nombre","id_carrera"],
+        attributes: ["id", "nombre", "id_carrera"],
+        include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
         where: { id }
       })
       .then(alumno => (alumno ? onSuccess(alumno) : onNotFound()))
