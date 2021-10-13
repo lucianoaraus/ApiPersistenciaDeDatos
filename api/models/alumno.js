@@ -1,16 +1,17 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  const materia = sequelize.define("materia", {
+  const alumno = sequelize.define("alumno", {
     nombre: DataTypes.STRING,
+    edad: DataTypes.INTEGER,
     id_carrera: DataTypes.INTEGER,
   });
 
-  materia.associate = function (models) {
-    materia.belongsTo(models.carrera, {
-      // materia pertenece al modelo carrera
+  alumno.associate = function (models) {
+    // associations can be defined here
+    alumno.belongsTo(models.carrera, {
       as: "carrera-relacionada", // nombre de mi relacion
       foreignKey: "id_carrera", // campo con el que voy a igualar
     });
   };
-  return materia;
+  return alumno;
 };
