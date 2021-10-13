@@ -1,23 +1,18 @@
-'use strict';
+"use strict";
 module.exports = (sequelize, DataTypes) => {
-  const universidades = sequelize.define('universidades', {
+  const universidades = sequelize.define("universidades", {
     nombre: DataTypes.STRING,
     direccion: DataTypes.STRING,
     localidad: DataTypes.STRING,
-    id_carrera: DataTypes.INTEGER
-  }, {});
-  universidades.associate = function(models) {
-    // associations can be defined here
-    universidades.associate = function (models) {
-      //asociacion a carrera (pertenece a:)
-      universidades.belongsTo(
-        models.carrera, // modelo al que pertenece
-        {
-          as: "carrera-relacionada", // nombre de mi relacion
-          foreignKey: "id_carrera", // campo con el que voy a igualar
-        }
-      );
-    };
+    id_carrera: DataTypes.INTEGER, // evaluar si es necesario
+  });
+  // associations can be defined here
+  universidades.associate = function (models) {
+    universidades.hasMany(models.carrera, {
+      // declaro que el modelo universidades tiene muchas carreras
+      as: "carrera",
+      primaryKey: "id",
+    });
   };
   return universidades;
 };
