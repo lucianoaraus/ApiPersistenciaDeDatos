@@ -5,9 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     direccion: DataTypes.STRING,
     localidad: DataTypes.STRING,
     id_carrera: DataTypes.INTEGER, // evaluar si es necesario
+                                  //-si lo es porq con ese campo se relaciona con carrera
   });
   
-  
+  //-esto no lo entendi
   // associations can be defined here
   universidades.associate = function (models) {
     universidades.hasMany(models.carrera, {
