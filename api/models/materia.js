@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   materia.associate = function (models) {
     materia.belongsTo(models.carrera, {
       // materia pertenece al modelo carrera
-      as: "carrera-relacionada", // nombre de mi relacion
+      as: "Carrera-Relacionada", // nombre de mi relacion
       foreignKey: "id_carrera", // campo con el que voy a igualar
     });
   };
