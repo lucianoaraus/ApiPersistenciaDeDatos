@@ -8,10 +8,12 @@ module.exports = (sequelize, DataTypes) => {
 
   alumno.associate = function (models) {
     // associations can be defined here
-    alumno.belongsTo(models.carrera, {
-      as: "carrera-relacionada", // nombre de mi relacion
-      foreignKey: "id_carrera", // campo con el que voy a igualar
-    });
+    
+    
+    alumno.belongsTo(models.carrera,{
+      as : 'Carrera-Relacionada',  // nombre de mi relacion
+      foreignKey: 'id_carrera'     // campo con el que voy a igualar
+    })
   };
   return alumno;
 };

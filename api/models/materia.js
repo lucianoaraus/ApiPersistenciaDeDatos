@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   materia.associate = function (models) {
+    
+    
     materia.belongsTo(models.carrera, {
       // materia pertenece al modelo carrera
       as: "Carrera-Relacionada", // nombre de mi relacion
