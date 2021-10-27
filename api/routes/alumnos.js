@@ -4,11 +4,15 @@ var models = require("../models");
 
 router.get("/", (req, res,next) => {
 
-  models.alumno.findAll({attributes: ["id","nombre","id_carrera"],
-       
-      include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}]
-
-    }).then(alumnos => res.send(alumnos)).catch(error => { return next(error)});
+  models.alumno
+  .findAndCountAll({
+    attributes: ["id","nombre","id_carrera"],
+    include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
+    order: [["id", "ASC"]],
+    //offset: 1, 
+    limit: 2
+    }).then(alumnos => res.send(alumnos))
+    .catch(error => { return next(error)});
 });
 
 router.post("/", (req, res) => {

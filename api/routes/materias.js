@@ -5,7 +5,10 @@ var models = require("../models");
 router.get("/", (req, res,next) => {
 
   models.materia.findAll({attributes: ["id","nombre","id_carrera"], 
-      include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}]
+      include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
+      order: [["id", "ASC"]],
+      //offset: 1, 
+      limit: 2
     }).then(materias => res.send(materias)).catch(error => { return next(error)});
 });
 

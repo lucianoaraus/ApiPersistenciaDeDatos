@@ -5,9 +5,10 @@ var models = require("../models");
 router.get("/", (req, res) => {
   console.log("Esto es un mensaje para ver en consola");
   models.carrera
-    .findAll({
+    .findAndCountAll({
       attributes: ["id", "nombre"],
       order: [["id", "ASC"]],
+      //depediendo del offset modifica la devolucion
       offset: 5,
       limit: 3
     })

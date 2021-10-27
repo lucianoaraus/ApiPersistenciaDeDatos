@@ -7,6 +7,9 @@ router.get("/", (req, res) => {
   models.universidades
     .findAll({
       attributes: ["id", "nombre", "direccion", "localidad", "id_carrera"],
+      order: [["id", "ASC"]],
+      //offset: 1, 
+      limit: 2
     })
     .then((universidades) => res.send(universidades))
     .catch(() => res.sendStatus(500));
