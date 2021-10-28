@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
       attributes: ["id", "nombre"],
       order: [["id", "ASC"]],
       //depediendo del offset modifica la devolucion
-      offset: 5,
+      offset: 0,
       limit: 3
     })
     .then(carreras => res.send(carreras))

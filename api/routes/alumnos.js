@@ -9,8 +9,8 @@ router.get("/", (req, res,next) => {
     attributes: ["id","nombre","id_carrera"],
     include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
     order: [["id", "ASC"]],
-    //offset: 1, 
-    limit: 2
+    offset: 0, 
+    limit: 3
     }).then(alumnos => res.send(alumnos))
     .catch(error => { return next(error)});
 });

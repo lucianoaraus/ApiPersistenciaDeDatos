@@ -5,11 +5,11 @@ var models = require("../models");
 router.get("/", (req, res) => {
   
   models.universidades
-    .findAll({
+    .findAndCountAll({
       attributes: ["id", "nombre", "direccion", "localidad", "id_carrera"],
       order: [["id", "ASC"]],
-      //offset: 1, 
-      limit: 2
+      offset: 0, 
+      limit: 3
     })
     .then((universidades) => res.send(universidades))
     .catch(() => res.sendStatus(500));
