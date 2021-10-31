@@ -3,12 +3,14 @@ var router = express.Router();
 var models = require("../models");
 
 router.get("/", (req, res,next) => {
-
+  const cantidadAVisualizar = parseInt(req.query.cantidadAVisualizar);
+  const paginaActual = parseInt(req.query.paginaActual);
+  
   models.materia.findAndCountAll({attributes: ["id","nombre","id_carrera"], 
       include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
       order: [["id", "ASC"]],
-      offset: 0, 
-      limit: 3
+      offset: (paginaActual-1) * cantidadAVisualizar, 
+      limit: cantidadAVisualizar
     }).then(materias => res.send(materias)).catch(error => { return next(error)});
 });
 

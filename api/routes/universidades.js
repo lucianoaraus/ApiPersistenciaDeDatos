@@ -3,13 +3,15 @@ var router = express.Router();
 var models = require("../models");
 
 router.get("/", (req, res) => {
+  const cantidadAVisualizar = parseInt(req.query.cantidadAVisualizar);
+  const paginaActual = parseInt(req.query.paginaActual);
   
   models.universidades
     .findAndCountAll({
       attributes: ["id", "nombre", "direccion", "localidad", "id_carrera"],
       order: [["id", "ASC"]],
-      offset: 0, 
-      limit: 3
+      offset: (paginaActual-1) * cantidadAVisualizar, 
+      limit: cantidadAVisualizar
     })
     .then((universidades) => res.send(universidades))
     .catch(() => res.sendStatus(500));

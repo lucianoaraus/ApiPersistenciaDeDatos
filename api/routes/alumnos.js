@@ -4,13 +4,16 @@ var models = require("../models");
 
 router.get("/", (req, res,next) => {
 
+  const cantidadAVisualizar = parseInt(req.query.cantidadAVisualizar);
+  const paginaActual = parseInt(req.query.paginaActual);
+
   models.alumno
   .findAndCountAll({
     attributes: ["id","nombre","id_carrera"],
     include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
     order: [["id", "ASC"]],
-    offset: 0, 
-    limit: 3
+    offset: (paginaActual-1) * cantidadAVisualizar, 
+    limit: cantidadAVisualizar
     }).then(alumnos => res.send(alumnos))
     .catch(error => { return next(error)});
 });
