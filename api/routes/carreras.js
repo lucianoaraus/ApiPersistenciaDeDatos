@@ -11,7 +11,6 @@ router.get("/", (req, res) => {
     .findAndCountAll({
       attributes: ["id", "nombre"],
       order: [["id", "ASC"]],
-      //depediendo del offset modifica la devolucion
       offset: (paginaActual-1) * cantidadAVisualizar, 
       limit: cantidadAVisualizar
     })

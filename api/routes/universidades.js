@@ -9,6 +9,7 @@ router.get("/", (req, res) => {
   models.universidades
     .findAndCountAll({
       attributes: ["id", "nombre", "direccion", "localidad", "id_carrera"],
+      include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
       order: [["id", "ASC"]],
       offset: (paginaActual-1) * cantidadAVisualizar, 
       limit: cantidadAVisualizar
