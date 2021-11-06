@@ -24,7 +24,6 @@ para insertar una materia nueva, se le debe pasar en formato json:
 
 para actualizar 
 
-
 ## Modulo Alumno
 
 {
@@ -35,4 +34,4 @@ para actualizar
         
 ## Modulo Carrera
 
-##Modulo Universidad
+## Modulo Universidad
