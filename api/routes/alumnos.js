@@ -9,7 +9,7 @@ router.get("/", (req, res,next) => {
 
   models.alumno
   .findAndCountAll({
-    attributes: ["id","nombre","id_carrera"],
+    attributes: ["id","nombre","edad","id_carrera"],
     include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
     order: [["id", "ASC"]],
     offset: (paginaActual-1) * cantidadAVisualizar, 
@@ -36,7 +36,7 @@ router.post("/", (req, res) => {
   const findAlumno = (id, { onSuccess, onNotFound, onError }) => {
     models.alumno
       .findOne({
-        attributes: ["id", "nombre", "id_carrera"],
+        attributes: ["id", "nombre","edad","id_carrera"],
         include:[{as:'Carrera-Relacionada', model:models.carrera, attributes: ["id","nombre"]}],
         where: { id }
       })
@@ -55,7 +55,7 @@ router.post("/", (req, res) => {
   router.put("/:id", (req, res) => {
     const onSuccess = alumno =>
     alumno
-        .update({ nombre: req.body.nombre }, { fields: ["nombre"] })
+        .update({ nombre: req.body.nombre, edad:req.body.edad }, { fields: ["nombre","edad"] })
         .then(() => res.sendStatus(200))
         .catch(error => {
         if (error == "SequelizeUniqueConstraintError: Validation error") {
